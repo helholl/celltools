@@ -87,10 +87,10 @@ def cell_to_crystal(cell: Cell) -> Crystal:
     _lattice = CrystalLattice(cell.lattice.basis)
     _atoms = []
     for atm in cell.atoms:
-        _atoms.append(Atom(atm.element, atm.coords.vector, _lattice))
+        _atoms.append(Atom(atm.element, atm.coords))
     for molc in cell.molecules:
         for atm in molc:
-            _atoms.append(CrystalAtom(atm.element, atm.coords.vector, _lattice))
+            _atoms.append(CrystalAtom(atm.element, list(atm.coords)))
     return Crystal(AtomicStructure(_atoms), _lattice.lattice_vectors)
 
 

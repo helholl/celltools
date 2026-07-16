@@ -163,7 +163,7 @@ class Atom(Element):
         label: Optional[str] = None,
     ):
         super().__init__(atm)
-        if not position:
+        if position is None:
             self._v = None
         else:
             self.coords = position
@@ -187,6 +187,9 @@ class Atom(Element):
                 return False
         else:
             raise TypeError("must be compared to atom instance")
+        
+    def __hash__(self):
+        return hash((self.element, tuple(self.coords.vector)))
 
     @property
     def coords(self) -> Vector:
